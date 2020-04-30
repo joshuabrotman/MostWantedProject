@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -85,6 +85,74 @@ function searchByName(people){
   return foundPerson;
 }
 
+
+
+function searchByTraits(people){
+  let displayOption = prompt("Do you want to search by gender, birthday, height, weight, eyecolor, or occupation? Type the option you want or 'restart' or 'quit'");
+
+  switch(displayOption){
+    case "gender":
+    searchByGender(people);
+    break;
+    case "birthday":
+    searchByBirthday(people);    
+    break;
+    case "height":
+    searchByHeight(people);    
+    break;
+    case "weight":
+    searchByWeight(people);    
+    break;
+    case "eyecolor":
+    searchByEyecolor(people);    
+    break;
+    case "occupation":
+    searchByOccupation(people);    
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again)
+  
+	}
+}
+
+function searchByGender(people){
+    let gender = promptFor("What is the person's gender?", chars);
+
+    let foundPerson = people.filter(function(person){
+	if(person.gender === gender){
+
+	  return true;
+	}
+	else{
+	  return false;
+	}
+})
+  
+  return foundPerson;
+}
+
+function searchByBirthDay(people){
+    let birthDay = promptFor("What is the person's birth day?", chars);
+
+    let foundPerson = people.filter(function(person){
+	if(person.gender === gender){
+
+	  return true;
+	}
+	else{
+	  return false;
+	}
+	})
+  
+  foundPerson = foundPerson[0];
+  return foundPerson;
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -101,20 +169,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function searchForParents(person, people){
-  let foundParents = people.filter(function(people){    
-    if(person.parents.includes(id)){
-      return true;
-    }
-    else(){
-      return false;
-    }
-  })
-}
 
-function searchForSiblings(person, people){
-  let foundPeople = people.filter(function(people))
-}
 
 // function that prompts and validates user input
 function promptFor(question, valid){
