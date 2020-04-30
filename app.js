@@ -163,9 +163,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-<<<<<<< HEAD
 
-=======
 function searchForParents(person, people){
   let foundParents = people.filter(function(people){    
     if(person.parents.includes(id)){
@@ -200,7 +198,7 @@ function searchForSpouse(person, people){
     }
   })
 }
->>>>>>> bf25ce4cd0ae9d95ab9f7c9666669d9819a10779
+
 
 
 // function that prompts and validates user input
