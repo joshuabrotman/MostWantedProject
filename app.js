@@ -40,7 +40,7 @@ function mainMenu(person, people){
     displayInfo(person);
     break;
     case "family":
-    // TODO: get person's family
+    searchForFamily(person, people);    
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -99,6 +99,21 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function searchForParents(person, people){
+  let foundParents = people.filter(function(people){    
+    if(person.parents.includes(id)){
+      return true;
+    }
+    else(){
+      return false;
+    }
+  })
+}
+
+function searchForSiblings(person, people){
+  let foundPeople = people.filter(function(people))
 }
 
 // function that prompts and validates user input
