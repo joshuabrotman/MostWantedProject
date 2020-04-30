@@ -37,7 +37,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayInfo(person);
+    displayPerson(person);
     break;
     case "family":
     searchForFamily(person, people);    
@@ -55,17 +55,6 @@ function mainMenu(person, people){
   }
 }
 
-function displayInfo(person){
-	alert("First Name: " + person.firstName +"\n" +
-		  "Last Name: " + person.lastName +"\n" +
-	      "Gender: " + person.gender +"\n" +
-		  "DOB: " + person.dob +"\n"+
-		  "Height: " + person.height +"\n" +
-		  "Weight: " + person.weight +"\n" +
-		  "Eye Color: " + person.eyeColor +"\n" +
-		  "Occupation: " + person.occupation +"\n");
-
-}
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
@@ -165,10 +154,53 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo += "Gener: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob +"\n";
+  personInfo += "Height: " + person.height +"\n";
+  personInfo += "Weight: " + person.weight +"\n";
+  personInfo += "Eye Color: " + person.eyeColor +"\n";
+  personInfo += "Occupation: " + person.occupation +"\n";    
   alert(personInfo);
 }
 
+<<<<<<< HEAD
+
+=======
+function searchForParents(person, people){
+  let foundParents = people.filter(function(people){    
+    if(person.parents.includes(id)){
+      return true;
+    }
+    else{
+      return false;
+    }    
+  })
+  return foundParents;
+}
+
+function searchForSiblings(person, people){
+  let foundSibling = people.filter(function(people){
+    for(i=0; i<person.parents.length; i++){
+        if(parents.includes(person.parents[i])){
+          return true;
+        }      
+      }
+    return false;
+        
+  })
+}
+
+function searchForSpouse(person, people){
+  let foundSpouse = people.filter(function(people){
+    if(currentSpouse = person.id){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+}
+>>>>>>> bf25ce4cd0ae9d95ab9f7c9666669d9819a10779
 
 
 // function that prompts and validates user input
