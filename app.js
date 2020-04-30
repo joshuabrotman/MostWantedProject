@@ -37,7 +37,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayInfo(person);
     break;
     case "family":
     // TODO: get person's family
@@ -55,19 +55,33 @@ function mainMenu(person, people){
   }
 }
 
+function displayInfo(person){
+	alert("First Name: " + person.firstName +"\n" +
+		  "Last Name: " + person.lastName +"\n" +
+	      "Gender: " + person.gender +"\n" +
+		  "DOB: " + person.dob +"\n"+
+		  "Height: " + person.height +"\n" +
+		  "Weight: " + person.weight +"\n" +
+		  "Eye Color: " + person.eyeColor +"\n" +
+		  "Occupation: " + person.occupation +"\n");
+
+}
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
+
       return true;
     }
     else{
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+  
+  foundPerson = foundPerson[0];
   return foundPerson;
 }
 
