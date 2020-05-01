@@ -43,7 +43,7 @@ function mainMenu(person, people){
     displayPerson(person);
     break;
     case "family":
-    searchForFamily(person, people);    
+    displayFamily(person, people);    
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -217,6 +217,11 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+function displayPeople(people, relationship){
+  alert(people.map(function(person){
+    return relationship + ": " + person.firstName + " " + person.lastName;
+  }).join("\n"));
+}
 
 function displayPerson(person){
   // print all of the information about a person:
@@ -233,9 +238,16 @@ function displayPerson(person){
 }
 
 
+function displayFamily(person, people){
+  displayPeople(searchForParents(person, people), "Parent");
+  displayPeople(searchForSiblings(person, people), "Sibling");
+  displayPeople(searchForSpouse(person, people), "Spouse");
+
+}
+
 function searchForParents(person, people){
   let foundParents = people.filter(function(people){    
-    if(person.parents.includes(id)){
+    if(person.parents.includes(people.id)){
       return true;
     }
     else{
@@ -246,26 +258,27 @@ function searchForParents(person, people){
 }
 
 function searchForSiblings(person, people){
-  let foundSibling = people.filter(function(people){
-    for(i=0; i<person.parents.length; i++){
-        if(parents.includes(person.parents[i])){
+  let foundSiblings = people.filter(function(people){
+    for(let i = 0; i < people.parents.length; i++){
+        if(person.parents.includes(people.parents[i]) && person.id !== people.id){
           return true;
-        }      
+        }             
       }
-    return false;
-        
+    return false;           
   })
+  return foundSiblings;
 }
 
 function searchForSpouse(person, people){
   let foundSpouse = people.filter(function(people){
-    if(currentSpouse = person.id){
+    if(people.currentSpouse == person.id){
       return true;
     }
     else{
       return false;
     }
   })
+  return foundSpouse;
 }
 
 
