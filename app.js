@@ -41,12 +41,15 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     displayPerson(person);
+    return mainMenu(person, people);
     break;
     case "family":
-    displayFamily(person, people);    
+    displayFamily(person, people); 
+    return mainMenu(person, people);   
     break;
     case "descendants":
-    // TODO: get person's descendants
+    displayPeople(searchForDescendants(person, people));
+    return mainMenu(person, people);
     break;
     case "restart":
     app(people); // restart
@@ -137,17 +140,18 @@ function searchByTrait(people, trait, criteria){
 }
 
 
-
-// alerts a list of people
-function displayPeople(people){
-  alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
-}
 function displayPeople(people, relationship){
-  alert(people.map(function(person){
+  if(relationship != null){
+    alert(people.map(function(person){
     return relationship + ": " + person.firstName + " " + person.lastName;
   }).join("\n"));
+  }
+  else{
+    alert(people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+  }
+  
 }
 
 function displayPerson(person){
@@ -162,6 +166,23 @@ function displayPerson(person){
   personInfo += "Eye Color: " + person.eyeColor +"\n";
   personInfo += "Occupation: " + person.occupation +"\n";    
   alert(personInfo);
+  
+}
+
+function searchForDescendants(person, people){
+  let foundDescendants = new Array;
+  for(let i = 0; i < people.length; i++){
+    if(people[i].parents.includes(person.id)){
+      foundDescendants.push(people[i]);
+    }
+  }
+  for(let i = 0; i < foundDescendants.length; i++){
+    let nextGen = searchForDescendants(foundDescendants[i], people);
+    nextGen.forEach(function(el){
+      foundDescendants.push(el);
+    });    
+  }
+  return foundDescendants;
 }
 
 
@@ -169,7 +190,7 @@ function displayFamily(person, people){
   displayPeople(searchForParents(person, people), "Parent");
   displayPeople(searchForSiblings(person, people), "Sibling");
   displayPeople(searchForSpouse(person, people), "Spouse");
-
+  
 }
 
 function searchForParents(person, people){
