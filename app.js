@@ -9,7 +9,10 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
+
       searchResults = searchByName(people);
+      // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+      mainMenu(searchResults, people);
       break;
     case 'no':
       searchResults = searchByTraits(people);
@@ -18,9 +21,7 @@ function app(people){
     app(people); // restart app
       break;
   }
-  
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+   
 }
 
 // Menu function to call once you find who you are looking for
@@ -126,7 +127,8 @@ function searchByGender(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 
@@ -147,7 +149,8 @@ function searchByBirthday(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 function searchByHeight(people){
@@ -167,7 +170,8 @@ function searchByHeight(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 function searchByWeight(people){
@@ -187,7 +191,8 @@ function searchByWeight(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 function searchByEyecolor(people){
@@ -207,7 +212,8 @@ function searchByEyecolor(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 function searchByOccupation(people){
@@ -227,7 +233,8 @@ function searchByOccupation(people){
     names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
   }
   alert(names);
-  return foundPerson;
+  //return foundPerson;
+  app(people); //reset
 }
 
 
