@@ -84,12 +84,12 @@ function searchByName(people){
 
 function searchByTraits(peopleList){
   
-    let genderCriteria = prompt("What is their gender? Type 'male', 'female', or none if you don't know.");
-    let birthdayCriteria = prompt("What is their birthday? (N/NN/NNNN), or none if you don't know.");
-    let heightCriteria = prompt("What is their height in inches? or none if you don't know.");
-    let weightCriteria = prompt("What is their weight in pounds? or none if you don't know.");
-    let eyecolorCriteria = prompt("What is their eye color? (brown, black, hazel, blue, or green), or none if you don't know.");
-    let occupationCriteria = prompt("What is their occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?), or none if you don't know.");
+    let genderCriteria = promptFor("What is their gender? Type 'male', 'female', or none if you don't know.",gender);
+    let birthdayCriteria = promptFor("What is their birthday? (N/NN/NNNN), or none if you don't know.", birthday);
+    let heightCriteria = promptFor("What is their height in inches? or none if you don't know.", height);
+    let weightCriteria = promptFor("What is their weight in pounds? or none if you don't know.", weight);
+    let eyecolorCriteria = promptFor("What is their eye color? (brown, black, hazel, blue, or green), or none if you don't know.", eyeColor);
+    let occupationCriteria = promptFor("What is their occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?), or none if you don't know.", occupation);
     
     if(genderCriteria != "none"){
       peopleList = searchByGender(peopleList, genderCriteria);
@@ -228,7 +228,7 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gener: " + person.gender + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob +"\n";
   personInfo += "Height: " + person.height +"\n";
   personInfo += "Weight: " + person.weight +"\n";
@@ -299,4 +299,41 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+function gender(input){
+  if(input.toLowerCase() === "male" || input.toLowerCase() === "female" || input.toLowerCase() === "none"){
+  return true;
+  }
+}
+
+function birthday(input){
+  let pattern = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+  //alert(reducedInput);
+  if( pattern.test(input) || input.toLowerCase() === "none"){
+  return true;
+  }
+}
+
+function height(input){
+  if(Number.isInteger(input) || input.toLowerCase() === "none"){
+  return true;
+  }
+}
+function weight(input){
+  if(Number.isInteger(input) || input.toLowerCase() === "none"){
+  return true;
+  }
+}
+function eyeColor(input){
+  if(input.toLowerCase() === "blue" || input.toLowerCase() === "brown" || input.toLowerCase() === "hazel" || input.toLowerCase() === "green" || input.toLowerCase() === "black" || input.toLowerCase() === "none"){
+  return true;
+  }
+}
+
+//programmer, doctor, politician, nurse, assistant, landscaper, architect, or student
+function occupation(input){
+  if(input.toLowerCase() === "doctor" || input.toLowerCase() === "politician" || input.toLowerCase() === "programmer" || input.toLowerCase() === "nurse" || input.toLowerCase() === "assistant" || input.toLowerCase() === "landscaper" || input.toLowerCase() === "architect" || input.toLowerCase() === "student" || input.toLowerCase() === "none"){
+  return true;
+  }
 }
