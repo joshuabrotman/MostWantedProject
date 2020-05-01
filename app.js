@@ -9,18 +9,19 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
+
       searchResults = searchByName(people);
+      // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+      mainMenu(searchResults, people);
       break;
     case 'no':
-      // TODO: search by traits
+      searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
       break;
   }
-  
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+   
 }
 
 // Menu function to call once you find who you are looking for
@@ -74,6 +75,169 @@ function searchByName(people){
   return foundPerson;
 }
 
+
+
+function searchByTraits(people){
+  let displayOption = prompt("Do you want to search by gender, birthday, height, weight, eyecolor, or occupation? Type the option you want or 'restart' or 'quit'");
+
+  switch(displayOption){
+    case "gender":
+    searchByGender(people);
+    break;
+    case "birthday":
+    searchByBirthday(people);    
+    break;
+    case "height":
+    searchByHeight(people);    
+    break;
+    case "weight":
+    searchByWeight(people);    
+    break;
+    case "eyecolor":
+    searchByEyecolor(people);    
+    break;
+    case "occupation":
+    searchByOccupation(people);    
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again)
+  
+	}
+}
+
+function searchByGender(people){
+    let gender = promptFor("What is the person's gender?", chars);
+
+    let foundPerson = people.filter(function(person){
+	if(person.gender === gender){
+
+	  return true;
+	}
+	else{
+	  return false;
+	}
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+
+function searchByBirthday(people){
+    let dob = promptFor("What is the person's birthday? (enter as N/NN/NN)", chars);
+
+    let foundPerson = people.filter(function(person){
+  if(person.dob === dob){
+
+    return true;
+  }
+  else{
+    return false;
+  }
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+function searchByHeight(people){
+    let height = promptFor("What is the person's height in inches?", chars);
+
+    let foundPerson = people.filter(function(person){
+  if(person.height == height){
+
+    return true;
+  }
+  else{
+    return false;
+  }
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+function searchByWeight(people){
+    let weight = promptFor("What is the person's weight in pounds?", chars);
+
+    let foundPerson = people.filter(function(person){
+  if(person.weight == weight){
+
+    return true;
+  }
+  else{
+    return false;
+  }
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+function searchByEyecolor(people){
+    let eyeColor = promptFor("What is the person's eye color? (brown, black, hazel, blue, or green)", chars);
+
+    let foundPerson = people.filter(function(person){
+  if(person.eyeColor === eyeColor){
+
+    return true;
+  }
+  else{
+    return false;
+  }
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+function searchByOccupation(people){
+    let occupation = promptFor("What is the person's occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?)", chars);
+
+    let foundPerson = people.filter(function(person){
+  if(person.occupation === occupation){
+
+    return true;
+  }
+  else{
+    return false;
+  }
+})
+  var names = "";
+  for (var i = 0; i <= foundPerson.length -1; i++) {
+    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
+  }
+  alert(names);
+  //return foundPerson;
+  app(people); //reset
+}
+
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -100,15 +264,13 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+
 function displayFamily(person, people){
   displayPeople(searchForParents(person, people), "Parent");
   displayPeople(searchForSiblings(person, people), "Sibling");
   displayPeople(searchForSpouse(person, people), "Spouse");
 
-
-
 }
-
 
 function searchForParents(person, people){
   let foundParents = people.filter(function(people){    
@@ -145,6 +307,7 @@ function searchForSpouse(person, people){
   })
   return foundSpouse;
 }
+
 
 
 // function that prompts and validates user input
