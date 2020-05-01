@@ -214,15 +214,21 @@ function searchByOccupation(people, occupation){
 }
 
 function displayPeople(people, relationship){
-  if(relationship != null){
+  if(relationship != null && people.length > 0){
     alert(people.map(function(person){
     return relationship + ": " + person.firstName + " " + person.lastName;
   }).join("\n"));
   }
-  else{
+  else if(relationship == null && people > 0){
     alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
+  }
+  else if(relationship != null && people == 0){    
+    alert("no results for " + relationship + "s");
+  }
+  else{
+    alert("no results. click 'ok' to continue");
   }
   
 }
