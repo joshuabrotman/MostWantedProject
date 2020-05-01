@@ -95,27 +95,27 @@ function searchByTraits(peopleList){
     let occupationCriteria = promptFor("What is their occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?), or none if you don't know.", occupation);
     
     if(genderCriteria != "none"){
-      peopleList = searchByGender(peopleList, genderCriteria);
+      peopleList = searchByTrait(peopleList, "gender", genderCriteria);
     }
 
     if(birthdayCriteria != "none"){
-      peopleList = searchByBirthday(peopleList, birthdayCriteria);
+      peopleList = searchByTrait(peopleList, "dob", birthdayCriteria);
     }
 
     if(heightCriteria != "none"){
-      peopleList = searchByHeight(peopleList, heightCriteria);
+      peopleList = searchByTrait(peopleList, "height", heightCriteria);
     }
 
     if(weightCriteria != "none"){
-      peopleList = searchByWeight(peopleList, weightCriteria);
+      peopleList = searchByTrait(peopleList, "weight", weightCriteria);
     }
 
     if(eyecolorCriteria != "none"){
-      peopleList = searchByEyecolor(peopleList, eyecolorCriteria);
+      peopleList = searchByTrait(peopleList, "eyeColor", eyecolorCriteria);
     }
 
     if(occupationCriteria != "none"){
-      peopleList = searchByOccupation(peopleList, occupationCriteria);
+      peopleList = searchByTrait(peopleList, "occupation", occupationCriteria);
     }
 
     return peopleList;
@@ -123,27 +123,11 @@ function searchByTraits(peopleList){
 	
 }
 
-function searchByGender(people, gender){
+
+function searchByTrait(people, trait, criteria){
 
     let foundPerson = people.filter(function(person){
-	if(person.gender === gender){
-
-	  return true;
-	}
-	else{
-	  return false;
-	}
-})
-  
-  return foundPerson;
-  
-
-}
-
-
-function searchByBirthday(people, dob){
-    let foundPerson = people.filter(function(person){
-  if(person.dob === dob){
+  if(person[trait] === criteria){
 
     return true;
   }
@@ -153,65 +137,8 @@ function searchByBirthday(people, dob){
 })
   
   return foundPerson;
-  
 }
 
-function searchByHeight(people, height){
-   let foundPerson = people.filter(function(person){
-  if(person.height == height){
-
-    return true;
-  }
-  else{
-    return false;
-  }
-})
-  return foundPerson;
-  
-}
-
-function searchByWeight(people,weight){
-    let foundPerson = people.filter(function(person){
-  if(person.weight == weight){
-
-    return true;
-  }
-  else{
-    return false;
-  }
-})
- 
-  return foundPerson;
-  
-}
-
-function searchByEyecolor(people, eyeColor){
-   let foundPerson = people.filter(function(person){
-  if(person.eyeColor === eyeColor){
-
-    return true;
-  }
-  else{
-    return false;
-  }
-})
-  return foundPerson;
-  
-}
-
-function searchByOccupation(people, occupation){
-    let foundPerson = people.filter(function(person){
-  if(person.occupation === occupation){
-
-    return true;
-  }
-  else{
-    return false;
-  }
-})
-  return foundPerson;
-  
-}
 
 function displayPeople(people, relationship){
   if(relationship != null && people.length > 0){
