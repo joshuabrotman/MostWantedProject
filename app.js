@@ -9,19 +9,21 @@ function app(people){
   let searchResults;
   switch(searchType){
     case 'yes':
-
-      searchResults = searchByName(people);
+        searchResults = searchByName(people);
+      //searchResults = searchByName(people);
       // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
       mainMenu(searchResults, people);
       break;
     case 'no':
-      searchResults = searchByTraits(people);
+          searchResults = searchByTraits(people);
       break;
       default:
     app(people); // restart app
       break;
+
+
   }
-   
+   displayPeople(searchResults);
 }
 
 // Menu function to call once you find who you are looking for
@@ -56,6 +58,9 @@ function mainMenu(person, people){
   }
 }
 
+function searchMultipleTraits(people, numberOfTraits){
+alert("hi!"+numberOfTraits);
+}
 
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
@@ -77,41 +82,45 @@ function searchByName(people){
 
 
 
-function searchByTraits(people){
-  let displayOption = prompt("Do you want to search by gender, birthday, height, weight, eyecolor, or occupation? Type the option you want or 'restart' or 'quit'");
-
-  switch(displayOption){
-    case "gender":
-    searchByGender(people);
-    break;
-    case "birthday":
-    searchByBirthday(people);    
-    break;
-    case "height":
-    searchByHeight(people);    
-    break;
-    case "weight":
-    searchByWeight(people);    
-    break;
-    case "eyecolor":
-    searchByEyecolor(people);    
-    break;
-    case "occupation":
-    searchByOccupation(people);    
-    break;
-    case "restart":
-    app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again)
+function searchByTraits(peopleList){
   
-	}
+    let genderCriteria = prompt("What is their gender? Type 'male', 'female', or none if you don't know.");
+    let birthdayCriteria = prompt("What is their birthday? (N/NN/NNNN), or none if you don't know.");
+    let heightCriteria = prompt("What is their height in inches? or none if you don't know.");
+    let weightCriteria = prompt("What is their weight in pounds? or none if you don't know.");
+    let eyecolorCriteria = prompt("What is their eye color? (brown, black, hazel, blue, or green), or none if you don't know.");
+    let occupationCriteria = prompt("What is their occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?), or none if you don't know.");
+    
+    if(genderCriteria != "none"){
+      peopleList = searchByGender(peopleList, genderCriteria);
+    }
+
+    if(birthdayCriteria != "none"){
+      peopleList = searchByBirthday(peopleList, birthdayCriteria);
+    }
+
+    if(heightCriteria != "none"){
+      peopleList = searchByHeight(peopleList, heightCriteria);
+    }
+
+    if(weightCriteria != "none"){
+      peopleList = searchByWeight(peopleList, weightCriteria);
+    }
+
+    if(eyecolorCriteria != "none"){
+      peopleList = searchByEyecolor(peopleList, eyecolorCriteria);
+    }
+
+    if(occupationCriteria != "none"){
+      peopleList = searchByOccupation(peopleList, occupationCriteria);
+    }
+
+    return peopleList;
+  
+	
 }
 
-function searchByGender(people){
-    let gender = promptFor("What is the person's gender?", chars);
+function searchByGender(people, gender){
 
     let foundPerson = people.filter(function(person){
 	if(person.gender === gender){
@@ -122,19 +131,14 @@ function searchByGender(people){
 	  return false;
 	}
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+  
+  return foundPerson;
+  
+
 }
 
 
-function searchByBirthday(people){
-    let dob = promptFor("What is the person's birthday? (enter as N/NN/NN)", chars);
-
+function searchByBirthday(people, dob){
     let foundPerson = people.filter(function(person){
   if(person.dob === dob){
 
@@ -144,19 +148,13 @@ function searchByBirthday(people){
     return false;
   }
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+  
+  return foundPerson;
+  
 }
 
-function searchByHeight(people){
-    let height = promptFor("What is the person's height in inches?", chars);
-
-    let foundPerson = people.filter(function(person){
+function searchByHeight(people, height){
+   let foundPerson = people.filter(function(person){
   if(person.height == height){
 
     return true;
@@ -165,18 +163,11 @@ function searchByHeight(people){
     return false;
   }
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+  return foundPerson;
+  
 }
 
-function searchByWeight(people){
-    let weight = promptFor("What is the person's weight in pounds?", chars);
-
+function searchByWeight(people,weight){
     let foundPerson = people.filter(function(person){
   if(person.weight == weight){
 
@@ -186,19 +177,13 @@ function searchByWeight(people){
     return false;
   }
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+ 
+  return foundPerson;
+  
 }
 
-function searchByEyecolor(people){
-    let eyeColor = promptFor("What is the person's eye color? (brown, black, hazel, blue, or green)", chars);
-
-    let foundPerson = people.filter(function(person){
+function searchByEyecolor(people, eyeColor){
+   let foundPerson = people.filter(function(person){
   if(person.eyeColor === eyeColor){
 
     return true;
@@ -207,18 +192,11 @@ function searchByEyecolor(people){
     return false;
   }
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+  return foundPerson;
+  
 }
 
-function searchByOccupation(people){
-    let occupation = promptFor("What is the person's occupation? (programmer, doctor, politician, nurse, assistant, landscaper, architect, or student?)", chars);
-
+function searchByOccupation(people, occupation){
     let foundPerson = people.filter(function(person){
   if(person.occupation === occupation){
 
@@ -228,13 +206,8 @@ function searchByOccupation(people){
     return false;
   }
 })
-  var names = "";
-  for (var i = 0; i <= foundPerson.length -1; i++) {
-    names += foundPerson[i].firstName + " " + foundPerson[i].lastName + "\n";
-  }
-  alert(names);
-  //return foundPerson;
-  app(people); //reset
+  return foundPerson;
+  
 }
 
 
