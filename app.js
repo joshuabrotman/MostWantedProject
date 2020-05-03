@@ -61,10 +61,6 @@ function mainMenu(person, people){
   }
 }
 
-function searchMultipleTraits(people, numberOfTraits){
-alert("hi!"+numberOfTraits);
-}
-
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -146,12 +142,12 @@ function displayPeople(people, relationship){
     return relationship + ": " + person.firstName + " " + person.lastName;
   }).join("\n"));
   }
-  else if(relationship == null && people > 0){
+  else if(relationship == null && people.length > 0){
     alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
   }
-  else if(relationship != null && people == 0){    
+  else if(relationship != null && people.length == 0){    
     alert("no results for " + relationship + "s");
   }
   else{
@@ -270,12 +266,12 @@ function birthday(input){
 }
 
 function height(input){
-  if(Number.isInteger(input) || input.toLowerCase() === "none"){
+  if((input >= 1 && input <= 200) || input.toLowerCase() === "none"){
   return true;
   }
 }
 function weight(input){
-  if(Number.isInteger(input) || input.toLowerCase() === "none"){
+  if((input >= 1 && input <= 2000) || input.toLowerCase() === "none"){
   return true;
   }
 }
